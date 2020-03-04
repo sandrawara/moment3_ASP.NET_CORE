@@ -9,7 +9,7 @@ namespace MOMENT3_CRUD.Models
     public class Genres
     {
        [Key]
-        public int GenreId { get; set; }
+        public int GenresId { get; set; }
 
         [Required]
         public string Genre_Name { get; set; }

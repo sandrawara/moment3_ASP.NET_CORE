@@ -22,7 +22,8 @@ namespace MOMENT3_CRUD.Controllers
         // GET: CDs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CDs.ToListAsync());
+            var cDContext = _context.CDs.Include(c => c.Genres);
+            return View(await cDContext.ToListAsync());
         }
 
         // GET: CDs/Details/5
@@ -34,6 +35,7 @@ namespace MOMENT3_CRUD.Controllers
             }
 
             var cD = await _context.CDs
+                .Include(c => c.Genres)
                 .FirstOrDefaultAsync(m => m.CdId == id);
             if (cD == null)
             {
@@ -46,6 +48,7 @@ namespace MOMENT3_CRUD.Controllers
         // GET: CDs/Create
         public IActionResult Create()
         {
+            ViewData["GenresId"] = new SelectList(_context.Genres, "GenresId", "Genre_Name");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace MOMENT3_CRUD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CdId,Artist,Title,Length,Label,Genre_Name")] CD cD)
+        public async Task<IActionResult> Create([Bind("CdId,Artist,Title,Length,Label,GenresId")] CD cD)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace MOMENT3_CRUD.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GenresId"] = new SelectList(_context.Genres, "GenresId", "Genre_Name", cD.GenresId);
             return View(cD);
         }
 
@@ -78,6 +82,7 @@ namespace MOMENT3_CRUD.Controllers
             {
                 return NotFound();
             }
+            ViewData["GenresId"] = new SelectList(_context.Genres, "GenresId", "Genre_Name", cD.GenresId);
             return View(cD);
         }
 
@@ -86,7 +91,7 @@ namespace MOMENT3_CRUD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CdId,Artist,Title,Length,Label,Genre_Name")] CD cD)
+        public async Task<IActionResult> Edit(int id, [Bind("CdId,Artist,Title,Length,Label,GenresId")] CD cD)
         {
             if (id != cD.CdId)
             {
@@ -113,6 +118,7 @@ namespace MOMENT3_CRUD.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GenresId"] = new SelectList(_context.Genres, "GenresId", "Genre_Name", cD.GenresId);
             return View(cD);
         }
 
@@ -125,6 +131,7 @@ namespace MOMENT3_CRUD.Controllers
             }
 
             var cD = await _context.CDs
+                .Include(c => c.Genres)
                 .FirstOrDefaultAsync(m => m.CdId == id);
             if (cD == null)
             {

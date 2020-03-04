@@ -34,7 +34,7 @@ namespace MOMENT3_CRUD.Controllers
             }
 
             var genres = await _context.Genres
-                .FirstOrDefaultAsync(m => m.GenreId == id);
+                .FirstOrDefaultAsync(m => m.GenresId == id);
             if (genres == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace MOMENT3_CRUD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GenreId,Genre_Name")] Genres genres)
+        public async Task<IActionResult> Create([Bind("GenresId,Genre_Name")] Genres genres)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace MOMENT3_CRUD.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GenreId,Genre_Name")] Genres genres)
+        public async Task<IActionResult> Edit(int id, [Bind("GenresId,Genre_Name")] Genres genres)
         {
-            if (id != genres.GenreId)
+            if (id != genres.GenresId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace MOMENT3_CRUD.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GenresExists(genres.GenreId))
+                    if (!GenresExists(genres.GenresId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace MOMENT3_CRUD.Controllers
             }
 
             var genres = await _context.Genres
-                .FirstOrDefaultAsync(m => m.GenreId == id);
+                .FirstOrDefaultAsync(m => m.GenresId == id);
             if (genres == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace MOMENT3_CRUD.Controllers
 
         private bool GenresExists(int id)
         {
-            return _context.Genres.Any(e => e.GenreId == id);
+            return _context.Genres.Any(e => e.GenresId == id);
         }
     }
 }

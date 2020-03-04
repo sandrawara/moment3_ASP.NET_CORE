@@ -4,16 +4,15 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h2>Create new genre</h2>
 
-<h4>Genres</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Genre_Name" class="control-label"></label>
+                <label asp-for="Genre_Name" class="control-label">Genre name</label>
                 <input asp-for="Genre_Name" class="form-control" />
                 <span asp-validation-for="Genre_Name" class="text-danger"></span>
             </div>

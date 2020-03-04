@@ -54,7 +54,7 @@ namespace MOMENT3_CRUD
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=CDs}/{action=Index}/{id?}");
             });
         }
     }

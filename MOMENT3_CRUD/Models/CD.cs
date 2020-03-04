@@ -25,8 +25,8 @@ namespace MOMENT3_CRUD.Models
 
 
         [Required]
-        public string Genre_Name { get; set; } //FK
+        public int GenresId { get; set; } //FK
 
-        public Genres Genres { get; set; } //Takes in Genres
+        public virtual Genres Genres { get; set; } //Takes in Genres
     }
 }

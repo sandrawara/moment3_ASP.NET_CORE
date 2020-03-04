@@ -11,6 +11,7 @@ namespace MOMENT3_CRUD.Data
 
         }
 
+        //Database output
         public DbSet<CD> CDs { get; set; }
         public DbSet<Genres> Genres { get; set; }
     }
